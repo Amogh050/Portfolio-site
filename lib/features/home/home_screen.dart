@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../intro/widgets/intro_desktop_widget.dart';
 import '../intro/widgets/intro_mobile_widget.dart';
-import '../techstack/widgets/techstack_desktop_widget.dart';
-import '../techstack/widgets/techstack_mobile_widget.dart';
+import '../skills/widgets/skills_desktop_widget.dart';
+import '../skills/widgets/skills_mobile_widget.dart';
 import '../projects/widgets/projects_desktop_widget.dart';
 import '../projects/widgets/projects_mobile_widget.dart';
 import '../contact_us/widgets/contact_us_desktop_widget.dart';
@@ -100,17 +100,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       ? const IntroDesktopWidget() 
                       : const IntroMobileWidget(),
                   ),
-                  // Tech Stack Section
+                  // Skills Section
                   Container(
                     key: _sectionKeys[1],
-                    width: double.infinity,
                     padding: EdgeInsets.symmetric(
                       horizontal: isDesktop ? 100.0 : 20.0,
-                      vertical: 30.0,
+                      vertical: 40.0,
                     ),
                     child: isDesktop 
-                      ? const TechstackDesktopWidget() 
-                      : const TechstackMobileWidget(),
+                      ? const SkillsDesktopWidget() 
+                      : const SkillsMobileWidget(),
                   ),
                   // Projects Section
                   Container(
@@ -190,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           _buildNavButton('Home', 0),
-                          _buildNavButton('Tech Stack', 1),
+                          _buildNavButton('Skills', 1),
                           _buildNavButton('Projects', 2),
                           _buildNavButton('Contact', 3),
                         ],
@@ -210,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           onSelected: _scrollToSection,
                           itemBuilder: (context) => [
                             _buildPopupMenuItem('Home', 0),
-                            _buildPopupMenuItem('Tech Stack', 1),
+                            _buildPopupMenuItem('Skills', 1),
                             _buildPopupMenuItem('Projects', 2),
                             _buildPopupMenuItem('Contact', 3),
                           ],

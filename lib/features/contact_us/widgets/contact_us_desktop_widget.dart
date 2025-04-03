@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ContactUsDesktopWidget extends StatelessWidget {
   const ContactUsDesktopWidget({super.key});
@@ -13,13 +14,15 @@ class ContactUsDesktopWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Contact Me',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Preah',
-                fontSize: 48,
-                fontWeight: FontWeight.bold,
+            Center(
+              child: Text(
+                'Contact Me',
+                style: GoogleFonts.dmSerifText(
+                  fontSize: 38,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  letterSpacing: 1.0,
+                ),
               ),
             ),
             const SizedBox(height: 40),

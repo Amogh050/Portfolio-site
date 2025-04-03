@@ -1,116 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'project_card.dart';
 
 class ProjectsDesktopWidget extends StatelessWidget {
   const ProjectsDesktopWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 100),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Projects',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Preah',
-                fontSize: 48,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 40),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 30,
-                mainAxisSpacing: 30,
-                children: [
-                  _buildProjectCard(
-                    'Portfolio Website',
-                    'A responsive portfolio website built with Flutter',
-                    Icons.web,
-                  ),
-                  _buildProjectCard(
-                    'E-Commerce App',
-                    'Full-stack e-commerce application with Flutter and Firebase',
-                    Icons.shopping_cart,
-                  ),
-                  _buildProjectCard(
-                    'Task Manager',
-                    'A productivity app for managing daily tasks',
-                    Icons.task_alt,
-                  ),
-                  _buildProjectCard(
-                    'Weather App',
-                    'Real-time weather information application',
-                    Icons.cloud,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildProjectCard(String title, String description, IconData icon) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            icon,
-            size: 48,
-            color: Colors.white,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: 'Preah',
-              fontSize: 24,
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            'Projects',
+            style: GoogleFonts.dmSerifText(
+              fontSize: 38,
               fontWeight: FontWeight.bold,
+              color: Colors.white,
+              letterSpacing: 1.0,
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            description,
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.8),
-              fontFamily: 'Preah',
-              fontSize: 16,
-            ),
-          ),
-          const Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+        ),
+        const SizedBox(height: 40),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            childAspectRatio: 1.2,
+            crossAxisSpacing: 30,
+            mainAxisSpacing: 30,
             children: [
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  'View Project',
-                  style: TextStyle(
-                    color: Colors.purple,
-                    fontFamily: 'Preah',
-                    fontSize: 16,
-                  ),
-                ),
+              ProjectCard(
+                imagePaths: [
+                  'assets/projects/user1.png',
+                  'assets/projects/user2.png',
+                ],
+                title: 'FlutterAmazon',
+                description: 'FlutterAmazon is a full-featured Amazon clone built with Flutter for the frontend and Node.js/Express with MongoDB for the backend. Deployed using Render, this project offers a robust e-commerce experience with role-based functionalities for both users and administrators.',
+                githubUrl: 'https://github.com/Amogh050/FlutterAmazon',
+              ),
+              ProjectCard(
+                imagePaths: [
+                  'assets/projects/scribble1.png',
+                  'assets/projects/scribble3.png',
+                ],
+                title: 'Scribble',
+                description: 'Scribble is a fun and interactive multiplayer drawing and guessing game where players take turns drawing an assigned word while others try to guess it. Compete with friends in a fast-paced game that challenges your creativity and word-guessing skills!',
+                githubUrl: 'https://github.com/Amogh050/Scribble',
+              ),
+              ProjectCard(
+                imagePaths: [
+                  'assets/projects/news1.png',
+                  'assets/projects/news2.png',
+                ],
+                title: 'FlutterNews',
+                description: 'FlutterNews is a Flutter application that fetches and displays news articles dynamically using an API. It features category-based filtering, location-based news, and a user-friendly UI. Additionally, it integrates Gemini AI to summarize news articles efficiently.',
+                githubUrl: 'https://github.com/Amogh050/FlutterNews',
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 } 
