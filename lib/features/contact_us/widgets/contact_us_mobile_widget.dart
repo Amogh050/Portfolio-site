@@ -1,45 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactUsMobileWidget extends StatelessWidget {
   const ContactUsMobileWidget({super.key});
 
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
+  }
+
+  Future<void> _launchEmail(String email) async {
+    final Uri emailUri = Uri.parse('mailto:$email');
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    }
+  }
+
+  Future<void> _launchPhone(String phone) async {
+    final Uri phoneUri = Uri.parse('tel:$phone');
+    if (await canLaunchUrl(phoneUri)) {
+      await launchUrl(phoneUri);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 40),
-            Center(
-              child: Text(
-                'Contact Me',
-                style: GoogleFonts.dmSerifText(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  letterSpacing: 1.0,
-                ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 40),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Text(
+              'Contact Me',
+              style: GoogleFonts.dmSerifText(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                letterSpacing: 1.0,
               ),
             ),
-            const SizedBox(height: 30),
-            // Contact Information
-            Column(
+          ),
+          const SizedBox(height: 30),
+          // Contact Information
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildContactInfo(
                   'Email',
-                  'amogh@example.com',
+                  'deshpandeamogh25@gmail.com',
                   Icons.email,
                 ),
                 const SizedBox(height: 20),
                 _buildContactInfo(
                   'Phone',
-                  '+1 234 567 890',
+                  '+91 7448205228',
                   Icons.phone,
                 ),
                 const SizedBox(height: 20),
@@ -49,30 +71,51 @@ class ContactUsMobileWidget extends StatelessWidget {
                   Icons.location_on,
                 ),
                 const SizedBox(height: 30),
-                const Text(
-                  'Social Media',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Preah',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 20),
+                // GitHub Link
                 Row(
                   children: [
-                    _buildSocialIcon(Icons.code, 'https://github.com/yourusername'),
+                    Text(
+                      'GitHub',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Preah',
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(width: 20),
-                    _buildSocialIcon(Icons.business, 'https://linkedin.com/in/yourusername'),
-                    const SizedBox(width: 20),
-                    _buildSocialIcon(Icons.play_circle, 'https://youtube.com/yourchannel'),
+                    MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () => _launchURL('https://github.com/Amogh050'),
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: SvgPicture.asset(
+                            'assets/icons/github.svg',
+                            width: 24,
+                            height: 24,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
-            const SizedBox(height: 40),
-            // Contact Form
-            Container(
+          ),
+          const SizedBox(height: 40),
+          // Contact Form
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.1),
@@ -164,14 +207,66 @@ class ContactUsMobileWidget extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 40),
-          ],
-        ),
+          ),
+          const SizedBox(height: 10),
+        ],
       ),
     );
   }
 
   Widget _buildContactInfo(String title, String value, IconData icon) {
+    Widget valueWidget;
+    
+    if (title == 'Email') {
+      valueWidget = GestureDetector(
+        onTap: () => _launchEmail(value),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'Preah',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+              decorationColor: Colors.white70,
+              decorationThickness: 1,
+            ),
+          ),
+        ),
+      );
+    } else if (title == 'Phone') {
+      valueWidget = GestureDetector(
+        onTap: () => _launchPhone(value),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'Preah',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+              decorationColor: Colors.white70,
+              decorationThickness: 1,
+            ),
+          ),
+        ),
+      );
+    } else {
+      valueWidget = Text(
+        value,
+        style: const TextStyle(
+          color: Colors.white,
+          fontFamily: 'Preah',
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    }
+    
     return Row(
       children: [
         Icon(
@@ -191,36 +286,10 @@ class ContactUsMobileWidget extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-            Text(
-              value,
-              style: const TextStyle(
-                color: Colors.white,
-                fontFamily: 'Preah',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            valueWidget,
           ],
         ),
       ],
-    );
-  }
-
-  Widget _buildSocialIcon(IconData icon, String url) {
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 24,
-        ),
-      ),
     );
   }
 } 

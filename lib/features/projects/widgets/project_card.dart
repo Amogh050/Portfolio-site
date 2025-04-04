@@ -23,8 +23,17 @@ class ProjectCard extends StatefulWidget {
 class _ProjectCardState extends State<ProjectCard> {
   bool _isHovered = false;
 
+  Future<void> _launchGithubUrl() async {
+    final Uri url = Uri.parse(widget.githubUrl);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bool isMobile = MediaQuery.of(context).size.width <= 600;
+    
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -70,7 +79,7 @@ class _ProjectCardState extends State<ProjectCard> {
               flex: 2,
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(isMobile ? 16.0 : 12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -81,9 +90,9 @@ class _ProjectCardState extends State<ProjectCard> {
                         Expanded(
                           child: Text(
                             widget.title,
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: isMobile ? 19 : 16,
                               fontWeight: FontWeight.bold,
                             ),
                             maxLines: 1,
@@ -91,35 +100,38 @@ class _ProjectCardState extends State<ProjectCard> {
                           ),
                         ),
                         // GitHub Link
-                        InkWell(
-                          onTap: _launchGithubUrl,
-                          child: Container(
-                            height: 36,
-                            width: 36,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white.withOpacity(0.1),
-                            ),
-                            padding: const EdgeInsets.all(8),
-                            child: SvgPicture.asset(
-                              'assets/icons/github.svg',
-                              colorFilter: ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: _launchGithubUrl,
+                            child: Container(
+                              height: isMobile ? 38 : 32,
+                              width: isMobile ? 38 : 32,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white.withOpacity(0.1),
+                              ),
+                              padding: EdgeInsets.all(isMobile ? 8 : 6),
+                              child: SvgPicture.asset(
+                                'assets/icons/github.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: isMobile ? 10 : 8),
                     // Description
                     Expanded(
                       child: Text(
                         widget.description,
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.7),
-                          fontSize: 13,
+                          fontSize: isMobile ? 13 : 11,
                           height: 1.4,
                         ),
                         overflow: TextOverflow.ellipsis,
@@ -143,7 +155,7 @@ class _ProjectCardState extends State<ProjectCard> {
     
     if (widget.imagePaths.length == 1) {
       return Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(15),
         child: Image.asset(
           widget.imagePaths[0],
           fit: BoxFit.contain,
@@ -156,7 +168,7 @@ class _ProjectCardState extends State<ProjectCard> {
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(9),
               child: Image.asset(
                 widget.imagePaths[0],
                 fit: BoxFit.contain,
@@ -166,7 +178,7 @@ class _ProjectCardState extends State<ProjectCard> {
           const SizedBox(width: 1),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(9),
               child: Image.asset(
                 widget.imagePaths[1],
                 fit: BoxFit.contain,
@@ -186,7 +198,7 @@ class _ProjectCardState extends State<ProjectCard> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 6, top: 12, bottom: 6),
+                  padding: const EdgeInsets.only(left: 9, right: 4.5, top: 9, bottom: 4.5),
                   child: Image.asset(
                     widget.imagePaths[0],
                     fit: BoxFit.contain,
@@ -195,7 +207,7 @@ class _ProjectCardState extends State<ProjectCard> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 6, right: 12, top: 12, bottom: 6),
+                  padding: const EdgeInsets.only(left: 4.5, right: 9, top: 9, bottom: 4.5),
                   child: Image.asset(
                     widget.imagePaths[1],
                     fit: BoxFit.contain,
@@ -211,7 +223,7 @@ class _ProjectCardState extends State<ProjectCard> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 6, top: 6, bottom: 12),
+                  padding: const EdgeInsets.only(left: 9, right: 4.5, top: 4.5, bottom: 9),
                   child: Image.asset(
                     widget.imagePaths.length > 2 ? widget.imagePaths[2] : widget.imagePaths[0],
                     fit: BoxFit.contain,
@@ -220,7 +232,7 @@ class _ProjectCardState extends State<ProjectCard> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 6, right: 12, top: 6, bottom: 12),
+                  padding: const EdgeInsets.only(left: 4.5, right: 9, top: 4.5, bottom: 9),
                   child: Image.asset(
                     widget.imagePaths.length > 3 ? widget.imagePaths[3] : widget.imagePaths[1],
                     fit: BoxFit.contain,
@@ -232,12 +244,5 @@ class _ProjectCardState extends State<ProjectCard> {
         ),
       ],
     );
-  }
-
-  void _launchGithubUrl() async {
-    final Uri url = Uri.parse(widget.githubUrl);
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    }
   }
 } 

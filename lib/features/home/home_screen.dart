@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _currentSection = index;
       });
+      
       Scrollable.ensureVisible(
         context,
         duration: const Duration(milliseconds: 800),
@@ -84,59 +85,72 @@ class _HomeScreenState extends State<HomeScreen> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             final isDesktop = constraints.maxWidth > 600;
+            final content = Column(
+              children: [
+                // Intro Section
+                Container(
+                  key: _sectionKeys[0],
+                  padding: EdgeInsets.only(
+                    top: isDesktop ? 20.0 : 60.0,
+                    left: isDesktop ? 100.0 : 20.0,
+                    right: isDesktop ? 100.0 : 20.0,
+                  ),
+                  child: isDesktop 
+                    ? const IntroDesktopWidget() 
+                    : const IntroMobileWidget(),
+                ),
+                // Skills Section
+                Container(
+                  key: _sectionKeys[1],
+                  padding: EdgeInsets.only(
+                    top: 90.0, // Increased top padding to ensure heading visibility
+                    left: isDesktop ? 100.0 : 20.0,
+                    right: isDesktop ? 100.0 : 20.0,
+                    bottom: 40.0,
+                  ),
+                  child: isDesktop 
+                    ? const SkillsDesktopWidget() 
+                    : const SkillsMobileWidget(),
+                ),
+                // Projects Section
+                Container(
+                  key: _sectionKeys[2],
+                  width: double.infinity,
+                  padding: EdgeInsets.only(
+                    top: 90.0, // Increased top padding to ensure heading visibility
+                    left: isDesktop ? 100.0 : 20.0,
+                    right: isDesktop ? 100.0 : 20.0,
+                    bottom: 50.0,
+                  ),
+                  child: isDesktop 
+                    ? const ProjectsDesktopWidget() 
+                    : const ProjectsMobileWidget(),
+                ),
+                // Contact Section
+                Container(
+                  key: _sectionKeys[3],
+                  width: double.infinity,
+                  padding: EdgeInsets.only(
+                    top: 90.0, // Increased top padding to ensure heading visibility
+                    left: isDesktop ? 100.0 : 20.0,
+                    right: isDesktop ? 100.0 : 20.0,
+                    bottom: 50.0,
+                  ),
+                  child: isDesktop 
+                    ? const ContactUsDesktopWidget() 
+                    : const ContactUsMobileWidget(),
+                ),
+              ],
+            );
+            
             return SingleChildScrollView(
               controller: _scrollController,
-              child: Column(
-                children: [
-                  // Intro Section
-                  Container(
-                    key: _sectionKeys[0],
-                    padding: EdgeInsets.only(
-                      top: isDesktop ? 20.0 : 60.0,
-                      left: isDesktop ? 100.0 : 20.0,
-                      right: isDesktop ? 100.0 : 20.0,
-                    ),
-                    child: isDesktop 
-                      ? const IntroDesktopWidget() 
-                      : const IntroMobileWidget(),
+              child: isDesktop 
+                ? content 
+                : SafeArea(
+                    top: false,
+                    child: content,
                   ),
-                  // Skills Section
-                  Container(
-                    key: _sectionKeys[1],
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isDesktop ? 100.0 : 20.0,
-                      vertical: 40.0,
-                    ),
-                    child: isDesktop 
-                      ? const SkillsDesktopWidget() 
-                      : const SkillsMobileWidget(),
-                  ),
-                  // Projects Section
-                  Container(
-                    key: _sectionKeys[2],
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isDesktop ? 100.0 : 20.0,
-                      vertical: 50.0,
-                    ),
-                    child: isDesktop 
-                      ? const ProjectsDesktopWidget() 
-                      : const ProjectsMobileWidget(),
-                  ),
-                  // Contact Section
-                  Container(
-                    key: _sectionKeys[3],
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isDesktop ? 100.0 : 20.0,
-                      vertical: 50.0,
-                    ),
-                    child: isDesktop 
-                      ? const ContactUsDesktopWidget() 
-                      : const ContactUsMobileWidget(),
-                  ),
-                ],
-              ),
             );
           },
         ),
@@ -166,16 +180,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: isDesktop ? 100.0 : 20.0,
-                  vertical: 10,
+                padding: EdgeInsets.only(
+                  left: isDesktop ? 100.0 : 20.0,
+                  right: isDesktop ? 100.0 : 20.0,
+                  top: isDesktop ? 10.0 : 40.0,
+                  bottom: 10.0,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // Logo or Name
                     Text(
-                      'AMOGH DESHPANDE',
+                      isDesktop ? 'AMOGH DESHPANDE' : 'AD',
                       style: GoogleFonts.audiowide(
                         color: Colors.white,
                         fontSize: 24,
