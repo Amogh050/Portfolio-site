@@ -136,6 +136,28 @@ class IntroMobileWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(height: 24),
+                // Download Resume Button
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: ElevatedButton(
+                    onPressed: () => _launchURL('https://drive.google.com/file/d/1RQ1vE8m-dnODS2smp0tjFfwkQrYqe7X8/view?usp=sharing'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.purple,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'Download Resume',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

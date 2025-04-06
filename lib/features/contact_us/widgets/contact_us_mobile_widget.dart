@@ -6,6 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 class ContactUsMobileWidget extends StatelessWidget {
   const ContactUsMobileWidget({super.key});
 
+  final String recipientEmail = 'deshpandeamogh25@gmail.com';
+
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -27,8 +29,26 @@ class ContactUsMobileWidget extends StatelessWidget {
     }
   }
 
+  Future<void> _sendEmailWithContent(String name, String message) async {
+    final subject = 'Message from $name via Portfolio';
+    final body = 'Name: $name\n\nMessage:\n$message';
+    
+    final Uri emailUri = Uri.parse(
+      'mailto:$recipientEmail?subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}'
+    );
+    
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else {
+      print('Could not launch $emailUri');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final nameController = TextEditingController();
+    final messageController = TextEditingController();
+    
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40),
       child: Column(
@@ -135,6 +155,7 @@ class ContactUsMobileWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
+                    controller: nameController,
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       hintText: 'Your Name',
@@ -151,22 +172,7 @@ class ContactUsMobileWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextField(
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Your Email',
-                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.purple),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
+                    controller: messageController,
                     maxLines: 5,
                     style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(
@@ -186,7 +192,15 @@ class ContactUsMobileWidget extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (nameController.text.isNotEmpty && 
+                            messageController.text.isNotEmpty) {
+                          _sendEmailWithContent(
+                            nameController.text.trim(),
+                            messageController.text.trim()
+                          );
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.purple,
                         padding: const EdgeInsets.symmetric(vertical: 15),
