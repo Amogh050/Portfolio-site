@@ -58,7 +58,7 @@ class _LoaderState extends State<Loader> {
               children: [
                 // Portfolio logo or name
                 Text(
-                  'AD',
+                  'AMOGH DESHPANDE',
                   style: TextStyle(
                     fontFamily: 'Audiowide',
                     fontSize: 48,

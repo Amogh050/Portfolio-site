@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../common/responsive_utils.dart';
 
 class ProjectCard extends StatefulWidget {
   final List<String> imagePaths;
@@ -32,7 +33,7 @@ class _ProjectCardState extends State<ProjectCard> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isMobile = MediaQuery.of(context).size.width <= 600;
+    final bool isMobile = ResponsiveUtils.isMobile(context);
     
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),

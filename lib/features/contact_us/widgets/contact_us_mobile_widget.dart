@@ -49,6 +49,14 @@ class ContactUsMobileWidget extends StatelessWidget {
     final nameController = TextEditingController();
     final messageController = TextEditingController();
     
+    final screenWidth = MediaQuery.of(context).size.width;
+    // Calculate width based on screen size for responsive layout, but cap at 450px
+    final contentWidth = screenWidth <= 600 
+                      ? screenWidth * 0.9 
+                      : screenWidth <= 800 
+                        ? screenWidth * 0.7 
+                        : 450.0;
+    
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40),
       child: Column(
@@ -68,157 +76,167 @@ class ContactUsMobileWidget extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           // Contact Information
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildContactInfo(
-                  'Email',
-                  'deshpandeamogh25@gmail.com',
-                  Icons.email,
-                ),
-                const SizedBox(height: 20),
-                _buildContactInfo(
-                  'Phone',
-                  '+91 7448205228',
-                  Icons.phone,
-                ),
-                const SizedBox(height: 20),
-                _buildContactInfo(
-                  'Location',
-                  'Pune, India',
-                  Icons.location_on,
-                ),
-                const SizedBox(height: 30),
-                // GitHub Link
-                Row(
+          Center(
+            child: SizedBox(
+              width: contentWidth,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'GitHub',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Preah',
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    _buildContactInfo(
+                      'Email',
+                      'deshpandeamogh25@gmail.com',
+                      Icons.email,
                     ),
-                    const SizedBox(width: 20),
-                    MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () => _launchURL('https://github.com/Amogh050'),
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12),
+                    const SizedBox(height: 20),
+                    _buildContactInfo(
+                      'Phone',
+                      '+91 7448205228',
+                      Icons.phone,
+                    ),
+                    const SizedBox(height: 20),
+                    _buildContactInfo(
+                      'Location',
+                      'Pune, India',
+                      Icons.location_on,
+                    ),
+                    const SizedBox(height: 30),
+                    // GitHub Link
+                    Row(
+                      children: [
+                        Text(
+                          'GitHub',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Preah',
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
                           ),
-                          child: SvgPicture.asset(
-                            'assets/icons/github.svg',
-                            width: 24,
-                            height: 24,
-                            colorFilter: const ColorFilter.mode(
-                              Colors.white,
-                              BlendMode.srcIn,
+                        ),
+                        const SizedBox(width: 20),
+                        MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: GestureDetector(
+                            onTap: () => _launchURL('https://github.com/Amogh050'),
+                            child: Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: SvgPicture.asset(
+                                'assets/icons/github.svg',
+                                width: 24,
+                                height: 24,
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
           const SizedBox(height: 40),
           // Contact Form
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Send a Message',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Preah',
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+          Center(
+            child: SizedBox(
+              width: contentWidth,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: nameController,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Your Name',
-                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.purple),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: messageController,
-                    maxLines: 5,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      hintText: 'Your Message',
-                      hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.purple),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (nameController.text.isNotEmpty && 
-                            messageController.text.isNotEmpty) {
-                          _sendEmailWithContent(
-                            nameController.text.trim(),
-                            messageController.text.trim()
-                          );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.purple,
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: const Text(
-                        'Send Message',
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Send a Message',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Preah',
-                          fontSize: 16,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: nameController,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: 'Your Name',
+                          hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(color: Colors.purple),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextField(
+                        controller: messageController,
+                        maxLines: 5,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: 'Your Message',
+                          hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(color: Colors.purple),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (nameController.text.isNotEmpty && 
+                                messageController.text.isNotEmpty) {
+                              _sendEmailWithContent(
+                                nameController.text.trim(),
+                                messageController.text.trim()
+                              );
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.purple,
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          child: const Text(
+                            'Send Message',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Preah',
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

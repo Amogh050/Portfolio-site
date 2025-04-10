@@ -7,6 +7,14 @@ class ProjectsMobileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    // Calculate width based on screen size but cap at 450px max width
+    final cardWidth = screenWidth <= 600 
+                    ? screenWidth * 0.9 
+                    : screenWidth <= 800 
+                      ? screenWidth * 0.7 
+                      : 450.0;
+    
     return Column(
       children: [
         Center(
@@ -22,7 +30,7 @@ class ProjectsMobileWidget extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: cardWidth,
           child: ListView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
