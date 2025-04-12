@@ -75,6 +75,19 @@ class ProjectsMobileWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
+              SizedBox(
+                height: 288,
+                child: ProjectCard(
+                  imagePaths: [
+                    'assets/projects/echo1.png',
+                    'assets/projects/echo2.png',
+                  ],
+                  title: 'Echo AI',
+                  description: 'Echo-AI is a simple Flutter project where you can interact with the app using your voice. The app listens to your commands and reads its responses aloud. It also supports generating images based on your input.',
+                  githubUrl: 'https://github.com/Amogh050/Echo-AI',
+                ),
+              ),
+              const SizedBox(height: 24),
             ],
           ),
         ),

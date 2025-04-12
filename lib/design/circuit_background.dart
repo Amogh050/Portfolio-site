@@ -21,6 +21,8 @@ class _CircuitBoardBackgroundState extends State<CircuitBoardBackground> with Si
   late AnimationController _controller;
   final List<Particle> _particles = [];
   final Random random = Random();
+  Offset _mousePosition = Offset.zero;
+  bool _mouseInside = false;
   
   @override
   void initState() {
@@ -49,44 +51,65 @@ class _CircuitBoardBackgroundState extends State<CircuitBoardBackground> with Si
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Background color
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF050510), // Darker blue-black
-                Color(0xFF07101E), // Darker blue
-                Color(0xFF020E21), // Deeper navy
-              ],
+    return MouseRegion(
+      onEnter: (event) {
+        setState(() {
+          _mouseInside = true;
+          _mousePosition = event.localPosition;
+        });
+      },
+      onExit: (event) {
+        setState(() {
+          _mouseInside = false;
+        });
+      },
+      onHover: (event) {
+        setState(() {
+          _mousePosition = event.localPosition;
+        });
+      },
+      child: Stack(
+        children: [
+          // Background color
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFF050510), // Darker blue-black
+                  Color(0xFF07101E), // Darker blue
+                  Color(0xFF020E21), // Deeper navy
+                ],
+              ),
             ),
           ),
-        ),
-        
-        // Circuit board particle effect
-        AnimatedBuilder(
-          animation: _controller,
-          builder: (context, _) {
-            return CustomPaint(
-              painter: CircuitPainter(
-                particles: _particles,
-                lineColor: widget.lineColor,
-                nodeColor: widget.nodeColor,
-              ),
-              size: Size(
-                MediaQuery.of(context).size.width,
-                MediaQuery.of(context).size.height,
-              ),
-            );
-          },
-        ),
-        
-        // Content
-        widget.child,
-      ],
+          
+          // Circuit board particle effect
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (context, _) {
+              return CustomPaint(
+                painter: CircuitPainter(
+                  particles: _particles,
+                  lineColor: widget.lineColor,
+                  nodeColor: widget.nodeColor,
+                  mousePosition: _mousePosition,
+                  mouseInside: _mouseInside,
+                  screenSize: MediaQuery.of(context).size,
+                ),
+                size: Size(
+                  MediaQuery.of(context).size.width,
+                  MediaQuery.of(context).size.height,
+                ),
+              );
+            },
+          ),
+          
+          // Content
+          widget.child,
+        ],
+      ),
     );
   }
 }
@@ -95,17 +118,21 @@ class Particle {
   late double x;
   late double y;
   late double speed;
+  late double baseSize;
   late double size;
   late double directionX;
   late double directionY;
+  late double alpha;
   
   Particle(Random random) {
     x = random.nextDouble() * 100; // Percentage position
     y = random.nextDouble() * 100;
     speed = 0.05 + random.nextDouble() * 0.1;
-    size = 1 + random.nextDouble() * 2;
+    baseSize = 1 + random.nextDouble() * 2;
+    size = baseSize;
     directionX = random.nextBool() ? speed : -speed;
     directionY = random.nextBool() ? speed : -speed;
+    alpha = 0.4;
   }
   
   void update() {
@@ -116,33 +143,88 @@ class Particle {
     if (x < 0 || x > 100) directionX *= -1;
     if (y < 0 || y > 100) directionY *= -1;
   }
+  
+  void reactToMouse(Offset mousePosition, Size screenSize, bool mouseInside) {
+    if (!mouseInside) {
+      size = baseSize;
+      alpha = 0.4;
+      return;
+    }
+    
+    final percentX = x / 100;
+    final percentY = y / 100;
+    final particleX = percentX * screenSize.width;
+    final particleY = percentY * screenSize.height;
+    
+    final distance = sqrt(
+      pow(mousePosition.dx - particleX, 2) + 
+      pow(mousePosition.dy - particleY, 2)
+    );
+    
+    // Interactive radius (pixels)
+    const interactiveRadius = 150.0;
+    
+    if (distance < interactiveRadius) {
+      // Calculate how close the cursor is (1.0 = at the center, 0.0 = at the edge)
+      final influence = 1.0 - (distance / interactiveRadius);
+      
+      // Grow the particle based on proximity
+      size = baseSize + (baseSize * 2 * influence);
+      
+      // Increase opacity based on proximity
+      alpha = 0.4 + (0.6 * influence);
+      
+      // Add small attraction towards cursor
+      final angle = atan2(mousePosition.dy - particleY, mousePosition.dx - particleX);
+      final attraction = 0.02 * influence;
+      
+      directionX += cos(angle) * attraction;
+      directionY += sin(angle) * attraction;
+      
+      // Cap speed
+      final currentSpeed = sqrt(pow(directionX, 2) + pow(directionY, 2));
+      if (currentSpeed > speed * 3) {
+        directionX = (directionX / currentSpeed) * speed * 3;
+        directionY = (directionY / currentSpeed) * speed * 3;
+      }
+    } else {
+      // Return to normal state
+      size = baseSize;
+      alpha = 0.4;
+    }
+  }
 }
 
 class CircuitPainter extends CustomPainter {
   final List<Particle> particles;
   final Color lineColor;
   final Color nodeColor;
+  final Offset mousePosition;
+  final bool mouseInside;
+  final Size screenSize;
   final double connectionDistance = 15; // Connection distance in percentage
   
   CircuitPainter({
     required this.particles,
     required this.lineColor,
     required this.nodeColor,
+    required this.mousePosition,
+    required this.mouseInside,
+    required this.screenSize,
   });
   
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = nodeColor
       ..strokeCap = StrokeCap.round;
     
     final linePaint = Paint()
-      ..color = lineColor.withOpacity(0.15)
       ..strokeWidth = 0.4;
     
     // Update particles
     for (var particle in particles) {
       particle.update();
+      particle.reactToMouse(mousePosition, size, mouseInside);
     }
     
     // Draw connections
@@ -164,7 +246,11 @@ class CircuitPainter extends CustomPainter {
         );
         
         if (distance < connectionDistance / 100) {
-          // Draw line
+          // Calculate average alpha between two particles for connection
+          final avgAlpha = (particles[i].alpha + particles[j].alpha) / 2;
+          
+          // Draw line with brightness based on particle alpha
+          linePaint.color = lineColor.withOpacity(0.15 * avgAlpha);
           canvas.drawLine(
             Offset(currentX, currentY),
             Offset(otherX, otherY),
@@ -173,8 +259,8 @@ class CircuitPainter extends CustomPainter {
         }
       }
       
-      // Draw particle
-      paint.color = nodeColor.withOpacity(0.4);
+      // Draw particle with dynamic size and alpha
+      paint.color = nodeColor.withOpacity(particles[i].alpha);
       canvas.drawCircle(
         Offset(currentX, currentY),
         particles[i].size,

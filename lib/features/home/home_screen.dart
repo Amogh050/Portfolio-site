@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     // Create slide animations
     _slideAnimations = _animationControllers
         .map((controller) => Tween<Offset>(
-              begin: const Offset(0, 0.1),
+              begin: const Offset(0, 0),
               end: Offset.zero,
             ).animate(CurvedAnimation(
               parent: controller,
@@ -127,21 +127,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       _animationControllers[0].forward();
                     }
                   },
-                  child: SlideTransition(
-                    position: _slideAnimations[0],
-                    child: FadeTransition(
-                      opacity: _fadeAnimations[0],
-                      child: Container(
-                        key: _sectionKeys[0],
-                        padding: EdgeInsets.only(
-                          top: isDesktop ? 20.0 : 60.0,
-                          left: isDesktop ? 100.0 : 20.0,
-                          right: isDesktop ? 100.0 : 20.0,
-                        ),
-                        child: isDesktop 
-                          ? const IntroDesktopWidget() 
-                          : const IntroMobileWidget(),
+                  child: FadeTransition(
+                    opacity: _fadeAnimations[0],
+                    child: Container(
+                      key: _sectionKeys[0],
+                      padding: EdgeInsets.only(
+                        top: isDesktop ? 20.0 : 60.0,
+                        left: isDesktop ? 100.0 : 20.0,
+                        right: isDesktop ? 100.0 : 20.0,
                       ),
+                      child: isDesktop 
+                        ? const IntroDesktopWidget() 
+                        : const IntroMobileWidget(),
                     ),
                   ),
                 ),
@@ -153,23 +150,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       _animationControllers[1].forward();
                     }
                   },
-                  child: SlideTransition(
-                    position: _slideAnimations[1],
-                    child: FadeTransition(
-                      opacity: _fadeAnimations[1],
-                      child: Container(
-                        key: _sectionKeys[1],
-                        height: MediaQuery.of(context).size.height,
-                        padding: EdgeInsets.only(
-                          top: 90.0, // Increased top padding to ensure heading visibility
-                          left: isDesktop ? 100.0 : 20.0,
-                          right: isDesktop ? 100.0 : 20.0,
-                          bottom: 40.0,
-                        ),
-                        child: isDesktop 
-                          ? const SkillsDesktopWidget() 
-                          : const SkillsMobileWidget(),
+                  child: FadeTransition(
+                    opacity: _fadeAnimations[1],
+                    child: Container(
+                      key: _sectionKeys[1],
+                      height: MediaQuery.of(context).size.height,
+                      padding: EdgeInsets.only(
+                        top: 90.0, // Increased top padding to ensure heading visibility
+                        left: isDesktop ? 100.0 : 20.0,
+                        right: isDesktop ? 100.0 : 20.0,
+                        bottom: 40.0,
                       ),
+                      child: isDesktop 
+                        ? const SkillsDesktopWidget() 
+                        : const SkillsMobileWidget(),
                     ),
                   ),
                 ),
@@ -181,23 +175,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       _animationControllers[2].forward();
                     }
                   },
-                  child: SlideTransition(
-                    position: _slideAnimations[2],
-                    child: FadeTransition(
-                      opacity: _fadeAnimations[2],
-                      child: Container(
-                        key: _sectionKeys[2],
-                        width: double.infinity,
-                        padding: EdgeInsets.only(
-                          top: 90.0, // Increased top padding to ensure heading visibility
-                          left: isDesktop ? 100.0 : 20.0,
-                          right: isDesktop ? 100.0 : 20.0,
-                          bottom: 50.0,
-                        ),
-                        child: isDesktop 
-                          ? const ProjectsDesktopWidget() 
-                          : const ProjectsMobileWidget(),
+                  child: FadeTransition(
+                    opacity: _fadeAnimations[2],
+                    child: Container(
+                      key: _sectionKeys[2],
+                      width: double.infinity,
+                      padding: EdgeInsets.only(
+                        top: 90.0, // Increased top padding to ensure heading visibility
+                        left: isDesktop ? 100.0 : 20.0,
+                        right: isDesktop ? 100.0 : 20.0,
+                        bottom: 50.0,
                       ),
+                      child: isDesktop 
+                        ? const ProjectsDesktopWidget() 
+                        : const ProjectsMobileWidget(),
                     ),
                   ),
                 ),
@@ -209,23 +200,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       _animationControllers[3].forward();
                     }
                   },
-                  child: SlideTransition(
-                    position: _slideAnimations[3],
-                    child: FadeTransition(
-                      opacity: _fadeAnimations[3],
-                      child: Container(
-                        key: _sectionKeys[3],
-                        width: double.infinity,
-                        padding: EdgeInsets.only(
-                          top: 90.0, // Increased top padding to ensure heading visibility
-                          left: isDesktop ? 100.0 : 20.0,
-                          right: isDesktop ? 100.0 : 20.0,
-                          bottom: 50.0,
-                        ),
-                        child: isDesktop 
-                          ? const ContactUsDesktopWidget() 
-                          : const ContactUsMobileWidget(),
+                  child: FadeTransition(
+                    opacity: _fadeAnimations[3],
+                    child: Container(
+                      key: _sectionKeys[3],
+                      width: double.infinity,
+                      padding: EdgeInsets.only(
+                        top: 90.0, // Increased top padding to ensure heading visibility
+                        left: isDesktop ? 100.0 : 20.0,
+                        right: isDesktop ? 100.0 : 20.0,
+                        bottom: 50.0,
                       ),
+                      child: isDesktop 
+                        ? const ContactUsDesktopWidget() 
+                        : const ContactUsMobileWidget(),
                     ),
                   ),
                 ),

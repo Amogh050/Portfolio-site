@@ -60,6 +60,15 @@ class ProjectsDesktopWidget extends StatelessWidget {
                   description: 'FlutterNews is a Flutter application that fetches and displays news articles dynamically using an API. It features category-based filtering, location-based news, and a user-friendly UI. Additionally, it integrates Gemini AI to summarize news articles efficiently.',
                   githubUrl: 'https://github.com/Amogh050/FlutterNews',
                 ),
+                ProjectCard(
+                  imagePaths: [
+                    'assets/projects/echo1.png',
+                    'assets/projects/echo2.png',
+                  ],
+                  title: 'Echo AI',
+                  description: 'Echo-AI is a simple Flutter project where you can interact with the app using your voice. The app listens to your commands and reads its responses aloud. It also supports generating images based on your input.',
+                  githubUrl: 'https://github.com/Amogh050/Echo-AI',
+                ),
               ],
             ),
           ),
