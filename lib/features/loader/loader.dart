@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Loader extends StatefulWidget {
   const Loader({super.key});
@@ -57,15 +58,10 @@ class _LoaderState extends State<Loader> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // Portfolio logo or name
-                Text(
-                  'AMOGH DESHPANDE',
-                  style: TextStyle(
-                    fontFamily: 'Audiowide',
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    letterSpacing: 2.0,
-                  ),
+                Image.asset(
+                  'assets/icons/profile_icon.png',
+                  height: 150,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(height: 40),
                 // Loading animation

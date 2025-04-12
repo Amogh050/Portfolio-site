@@ -10,6 +10,8 @@ import '../projects/widgets/projects_mobile_widget.dart';
 import '../contact_us/widgets/contact_us_desktop_widget.dart';
 import '../contact_us/widgets/contact_us_mobile_widget.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import '../../design/circuit_background.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -53,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     // Create slide animations
     _slideAnimations = _animationControllers
         .map((controller) => Tween<Offset>(
-              begin: const Offset(0, 0.25), // Start 25% below its position
+              begin: const Offset(0, 0.1),
               end: Offset.zero,
             ).animate(CurvedAnimation(
               parent: controller,
@@ -111,18 +113,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              const Color(0xFF0A0A1A),  // Darker blue-black
-              const Color(0xFF0D1525),  // Darker blue
-              const Color(0xFF0A1F3C),  // Darker purple-blue
-            ],
-          ),
-        ),
+      body: CircuitBoardBackground(
         child: LayoutBuilder(
           builder: (context, constraints) {
             final isDesktop = ResponsiveUtils.isDesktopFromConstraints(constraints);
@@ -168,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       opacity: _fadeAnimations[1],
                       child: Container(
                         key: _sectionKeys[1],
+                        height: MediaQuery.of(context).size.height,
                         padding: EdgeInsets.only(
                           top: 90.0, // Increased top padding to ensure heading visibility
                           left: isDesktop ? 100.0 : 20.0,
@@ -287,15 +279,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Logo or Name
-                      Text(
-                        isDesktop ? 'AMOGH DESHPANDE' : 'AD',
-                        style: GoogleFonts.audiowide(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.2,
+                      if (isDesktop)
+                        Image.asset(
+                          'assets/icons/profile_icon.png',
+                          height: 50,
+                          fit: BoxFit.contain,
+                        )
+                      else
+                        Image.asset(
+                          'assets/icons/profile_icon.png',
+                          height: 50,
+                          fit: BoxFit.contain,
                         ),
-                      ),
                       // Navigation
                       if (isDesktop)
                         Row(
