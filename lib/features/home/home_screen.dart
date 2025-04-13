@@ -156,11 +156,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     opacity: _fadeAnimations[1],
                     child: Container(
                       key: _sectionKeys[1],
-                      height: MediaQuery.of(context).size.height,
+                      height: isDesktop 
+                        ? MediaQuery.of(context).size.height 
+                        : null,
                       padding: EdgeInsets.only(
                         top: isDesktop ? 90.0 : 80.0,
                         left: isDesktop ? 100.0 : 20.0,
                         right: isDesktop ? 100.0 : 20.0,
+                        bottom: isDesktop ? 0.0 : 20.0,
                       ),
                       child: isDesktop 
                         ? const IntroDesktopWidget() 

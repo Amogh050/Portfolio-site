@@ -41,6 +41,7 @@ class ProjectsDesktopWidget extends StatelessWidget {
                   title: 'FlutterAmazon',
                   description: 'FlutterAmazon is a full-featured Amazon clone built with Flutter for the frontend and Node.js/Express with MongoDB for the backend. Deployed using Render, this project offers a robust e-commerce experience with role-based functionalities for both users and administrators.',
                   githubUrl: 'https://github.com/Amogh050/FlutterAmazon',
+                  technologies: ['Flutter', 'NodeJS', 'MongoDB', 'JWT', 'Render'],
                 ),
                 ProjectCard(
                   imagePaths: [
@@ -50,6 +51,7 @@ class ProjectsDesktopWidget extends StatelessWidget {
                   title: 'Scribble',
                   description: 'Scribble is a fun and interactive multiplayer drawing and guessing game where players take turns drawing an assigned word while others try to guess it. Compete with friends in a fast-paced game that challenges your creativity and word-guessing skills!',
                   githubUrl: 'https://github.com/Amogh050/Scribble',
+                  technologies: ['Flutter', 'NodeJS', 'MongoDB', 'WebSockets'],
                 ),
                 ProjectCard(
                   imagePaths: [
@@ -59,6 +61,7 @@ class ProjectsDesktopWidget extends StatelessWidget {
                   title: 'FlutterNews',
                   description: 'FlutterNews is a Flutter application that fetches and displays news articles dynamically using an API. It features category-based filtering, location-based news, and a user-friendly UI. Additionally, it integrates Gemini AI to summarize news articles efficiently.',
                   githubUrl: 'https://github.com/Amogh050/FlutterNews',
+                  technologies: ['Flutter', 'Riverpod', 'API'],
                 ),
                 ProjectCard(
                   imagePaths: [
@@ -68,6 +71,7 @@ class ProjectsDesktopWidget extends StatelessWidget {
                   title: 'Echo AI',
                   description: 'Echo-AI is a simple Flutter project where you can interact with the app using your voice. The app listens to your commands and reads its responses aloud. It also supports generating images based on your input.',
                   githubUrl: 'https://github.com/Amogh050/Echo-AI',
+                  technologies: ['Flutter', 'API', 'Text-to-Speech'],
                 ),
               ],
             ),

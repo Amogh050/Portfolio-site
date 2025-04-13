@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'features/home/home_screen.dart';
 import 'features/loader/loader.dart';
+import 'design/utils/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Amogh Deshpande',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
-        useMaterial3: true,
-      ),
+      theme: AppTheme.darkTheme,
       home: const LoaderWrapper(),
     );
   }

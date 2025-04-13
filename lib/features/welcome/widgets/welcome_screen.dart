@@ -34,7 +34,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         return false; // Allow notification to continue bubbling
       },
       child: SizedBox(
-        height: size.height,
+        height: isDesktop ? size.height : size.height * 0.9,
         width: size.width,
         child: Stack(
           children: [
@@ -43,16 +43,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               bottom: 0,
               left: 0,
               right: 0,
-              child: Image.asset(
-                'assets/images/welcome_image.png',
-                height: isDesktop ? size.height * 0.6 : size.height * 0.4,
-                fit: BoxFit.contain,
+              child: Container(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset(
+                  'assets/images/welcome_image.png',
+                  height: isDesktop ? size.height * 0.6 : size.height * 0.35,
+                  fit: BoxFit.contain,
+                  alignment: Alignment.bottomCenter,
+                ),
               ),
             ),
             
             // Text content positioned in upper portion
             Positioned(
-              top: isDesktop ? size.height * 0.15 : size.height * 0.1,
+              top: isDesktop ? size.height * 0.15 : size.height * 0.08,
               left: 0,
               right: 0,
               child: Padding(
@@ -67,7 +71,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         'Amogh Deshpande',
                         style: TextStyle(
                           fontFamily: 'Astro',
-                          fontSize: isDesktop ? 90 : 50,
+                          fontSize: isDesktop ? 90 : 38,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           letterSpacing: 1.5,
@@ -75,13 +79,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                     ),
                     
-                    SizedBox(height: isDesktop ? 20 : 15),
+                    SizedBox(height: isDesktop ? 20 : 10),
                     
                     // Typewriter animation with slight right positioning
                     Align(
                       alignment: const Alignment(0.6, 0),
                       child: TypingAnimationWidget(
-                        fontSize: isDesktop ? 36 : 26,
+                        fontSize: isDesktop ? 36 : 22,
                         textColor: Colors.purple,
                         isMobile: !isDesktop,
                       ),

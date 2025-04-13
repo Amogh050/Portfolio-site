@@ -8,6 +8,7 @@ class ProjectCard extends StatefulWidget {
   final String title;
   final String description;
   final String githubUrl;
+  final List<String> technologies;
 
   const ProjectCard({
     super.key,
@@ -15,6 +16,7 @@ class ProjectCard extends StatefulWidget {
     required this.title,
     required this.description,
     required this.githubUrl,
+    this.technologies = const [],
   });
 
   @override
@@ -132,13 +134,49 @@ class _ProjectCardState extends State<ProjectCard> {
                         widget.description,
                         style: TextStyle(
                           color: Colors.white.withOpacity(0.7),
-                          fontSize: isMobile ? 13 : 11,
+                          fontSize: isMobile ? 13 : 12,
                           height: 1.4,
                         ),
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 4,
+                        maxLines: widget.technologies.isEmpty ? 4 : 3,
                       ),
                     ),
+                    // Technology tags
+                    if (widget.technologies.isNotEmpty) ...[
+                      SizedBox(height: isMobile ? 10 : 8),
+                      SizedBox(
+                        height: isMobile ? 28 : 24,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: widget.technologies.length,
+                          separatorBuilder: (context, index) => SizedBox(width: isMobile ? 8 : 6),
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: isMobile ? 10 : 8, 
+                                vertical: isMobile ? 5 : 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.purple.withOpacity(0.15),
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(
+                                  color: Colors.purple.withOpacity(0.3),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Text(
+                                widget.technologies[index],
+                                style: TextStyle(
+                                  color: Colors.purple,
+                                  fontSize: isMobile ? 11 : 12,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),

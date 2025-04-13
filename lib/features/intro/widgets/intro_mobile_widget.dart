@@ -6,7 +6,7 @@ import 'typing_animation_widget.dart';
 import 'intro_desktop_widget.dart';
 
 class IntroMobileWidget extends StatelessWidget {
-  const IntroMobileWidget({super.key});
+  const IntroMobileWidget({Key? key}) : super(key: key);
 
   Future<void> _launchURL(String url) async {
     final Uri uri = Uri.parse(url);
@@ -17,11 +17,10 @@ class IntroMobileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40),
+    return SingleChildScrollView(
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // About Me Heading
           Center(
