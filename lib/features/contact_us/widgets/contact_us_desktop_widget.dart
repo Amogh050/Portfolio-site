@@ -60,8 +60,8 @@ class ContactUsDesktopWidget extends StatelessWidget {
             Center(
               child: Text(
                 'Contact Me',
-                style: GoogleFonts.dmSerifText(
-                  fontSize: 38,
+                style: GoogleFonts.tourney(
+                  fontSize: 45,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   letterSpacing: 1.0,

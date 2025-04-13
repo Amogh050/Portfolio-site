@@ -27,6 +27,7 @@ class _TypingAnimationWidgetState extends State<TypingAnimationWidget> {
   final List<String> _roles = [
     'Flutter Developer',
     'Backend Developer',
+    'DSA Enthusiast',
   ];
 
   @override
@@ -82,7 +83,8 @@ class _TypingAnimationWidgetState extends State<TypingAnimationWidget> {
   Widget build(BuildContext context) {
     return Text(
       _currentText,
-      style: GoogleFonts.poppins(
+      style: TextStyle(
+        fontFamily: 'Ethnocentric',
         color: widget.textColor,
         fontSize: widget.fontSize,
         fontWeight: FontWeight.w600,

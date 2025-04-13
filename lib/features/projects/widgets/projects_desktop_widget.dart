@@ -11,9 +11,9 @@ class ProjectsDesktopWidget extends StatelessWidget {
       children: [
         Center(
           child: Text(
-            'Projects',
-            style: GoogleFonts.dmSerifText(
-              fontSize: 38,
+            'Featured Projects',
+            style: GoogleFonts.tourney(
+              fontSize: 45,
               fontWeight: FontWeight.bold,
               color: Colors.white,
               letterSpacing: 1.0,

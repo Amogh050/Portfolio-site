@@ -66,8 +66,8 @@ class ContactUsMobileWidget extends StatelessWidget {
           Center(
             child: Text(
               'Contact Me',
-              style: GoogleFonts.dmSerifText(
-                fontSize: 28,
+              style: GoogleFonts.tourney(
+                fontSize: 31,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 letterSpacing: 1.0,

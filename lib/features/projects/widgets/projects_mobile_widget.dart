@@ -19,9 +19,9 @@ class ProjectsMobileWidget extends StatelessWidget {
       children: [
         Center(
           child: Text(
-            'Projects',
-            style: GoogleFonts.dmSerifText(
-              fontSize: 28,
+            'Featured Projects',
+            style: GoogleFonts.tourney(
+              fontSize: 31,
               fontWeight: FontWeight.bold,
               color: Colors.white,
               letterSpacing: 1.0,

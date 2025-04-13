@@ -22,6 +22,16 @@ class SkillsDesktopWidget extends StatelessWidget {
     Skill(iconPath: 'assets/icons/cpp.svg', label: 'C++'),
     Skill(iconPath: 'assets/icons/mysql.svg', label: 'MySQL'),
   ];
+  
+  static final List<Skill> thirdRowSkills = [
+    Skill(iconPath: 'assets/icons/websocket.svg', label: 'WebSocket'),
+    Skill(iconPath: 'assets/icons/jwt.svg', label: 'JWT'),
+    Skill(iconPath: 'assets/icons/cloudinary.svg', label: 'Cloudinary'),
+    Skill(iconPath: 'assets/icons/postman.svg', label: 'Postman'),
+    Skill(iconPath: 'assets/icons/ocaml.svg', label: 'OCaml'),
+    Skill(iconPath: 'assets/icons/netlify.svg', label: 'Netlify'),
+    Skill(iconPath: 'assets/icons/figma.svg', label: 'Figma'),
+  ];
 
   const SkillsDesktopWidget({super.key});
 
@@ -36,8 +46,8 @@ class SkillsDesktopWidget extends StatelessWidget {
           Center(
             child: Text(
               'Skills',
-              style: GoogleFonts.dmSerifText(
-                fontSize: 38,
+              style: GoogleFonts.tourney(
+                fontSize: 45,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 letterSpacing: 1.0,
@@ -77,6 +87,25 @@ class SkillsDesktopWidget extends StatelessWidget {
                   ...secondRowSkills.map((skill) => _buildSkillCard(skill)),
                   // Add duplicates to ensure continuous flow
                   ...secondRowSkills.map((skill) => _buildSkillCard(skill)),
+                ],
+              ),
+            ),
+          ),
+          
+          const SizedBox(height: 30),
+          
+          // Third Row Marquee
+          SizedBox(
+            height: 100,
+            child: Marqueer(
+              pps: 50, // Different speed for visual interest
+              direction: MarqueerDirection.rtl,
+              restartAfterInteractionDuration: const Duration(seconds: 3),
+              child: Row(
+                children: [
+                  ...thirdRowSkills.map((skill) => _buildSkillCard(skill)),
+                  // Add duplicates to ensure continuous flow
+                  ...thirdRowSkills.map((skill) => _buildSkillCard(skill)),
                 ],
               ),
             ),
