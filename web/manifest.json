@@ -1,11 +1,11 @@
 {
-    "name": "amogh_deshpande",
-    "short_name": "amogh_deshpande",
+    "name": "Amogh Deshpande | Portfolio",
+    "short_name": "Amogh Portfolio",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0A0A1A",
+    "theme_color": "#A362FF",
+    "description": "Amogh Deshpande's personal portfolio showcasing projects and skills",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

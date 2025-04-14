@@ -33,14 +33,30 @@ class ContactUsMobileWidget extends StatelessWidget {
     final subject = 'Message from $name via Portfolio';
     final body = 'Name: $name\n\nMessage:\n$message';
     
-    final Uri emailUri = Uri.parse(
-      'mailto:$recipientEmail?subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}'
-    );
+    // Use Gmail specific URL scheme for mobile
+    final gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1'
+        '&to=$recipientEmail'
+        '&su=${Uri.encodeComponent(subject)}'
+        '&body=${Uri.encodeComponent(body)}';
     
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri);
-    } else {
-      print('Could not launch $emailUri');
+    try {
+      // Try Gmail first
+      if (await canLaunchUrl(Uri.parse(gmailUrl))) {
+        await launchUrl(Uri.parse(gmailUrl), mode: LaunchMode.externalApplication);
+      } else {
+        // Fallback to regular mailto
+        final Uri emailUri = Uri.parse(
+          'mailto:$recipientEmail?subject=${Uri.encodeComponent(subject)}&body=${Uri.encodeComponent(body)}'
+        );
+        
+        if (await canLaunchUrl(emailUri)) {
+          await launchUrl(emailUri);
+        } else {
+          print('Could not launch email');
+        }
+      }
+    } catch (e) {
+      print('Error launching email: $e');
     }
   }
 

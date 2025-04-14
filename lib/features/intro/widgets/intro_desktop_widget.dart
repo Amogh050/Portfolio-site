@@ -16,114 +16,119 @@ class IntroDesktopWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-        children: [
-          Center(
-            child: Text(
+    final screenSize = MediaQuery.of(context).size;
+    
+    return Container(
+      height: screenSize.height,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
               'About Me',
               style: GoogleFonts.tourney(
-                fontSize: 45,
+                fontSize: 50,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
-                letterSpacing: 1.0,
+                letterSpacing: 1.5,
               ),
             ),
-          ),
-          SizedBox(height: 40),
-          Expanded(
-            child: Column(
+            SizedBox(height: 50),
+            
+            Container(
+              width: screenSize.width * 0.8,
+              padding: const EdgeInsets.all(35),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.3),
+                border: Border.all(
+                  color: Colors.purple.withOpacity(0.5),
+                  width: 3,
+                ),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.purple.withOpacity(0.15),
+                    blurRadius: 25,
+                    spreadRadius: 3,
+                    offset: const Offset(0, 5),
+                  ),
+                  BoxShadow(
+                    color: Colors.blue.withOpacity(0.05),
+                    blurRadius: 40,
+                    spreadRadius: 2,
+                    offset: const Offset(0, -2),
+                  ),
+                ],
+              ),
+              child: Text(
+                "I'm a B.Tech Computer Science student at ABV IIITM Gwalior with a strong passion for software development. I specialize in Flutter for mobile app development and have experience in backend technologies like Node.js, Express, and MongoDB. My expertise extends to real-time systems, algorithmic problem-solving, and database management. I enjoy building efficient, scalable solutions and continuously exploring new technologies to enhance my skills.",
+                style: GoogleFonts.poppins(
+                  color: Colors.white.withOpacity(0.95),
+                  fontSize: 20,
+                  height: 1.7,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 50),
+            
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Paragraph in purple bordered box
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  padding: const EdgeInsets.all(25),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.3),
-                    border: Border.all(
-                      color: Colors.purple.withOpacity(0.5),
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.purple.withOpacity(0.1),
-                        blurRadius: 15,
-                        spreadRadius: 2,
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => _launchURL('https://github.com/Amogh050'),
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                    ],
-                  ),
-                  child: Text(
-                    "I'm a B.Tech Computer Science student at ABV IIITM Gwalior with a strong passion for software development. I specialize in Flutter for mobile app development and have experience in backend technologies like Node.js, Express, and MongoDB. My expertise extends to real-time systems, algorithmic problem-solving, and database management. I enjoy building efficient, scalable solutions and continuously exploring new technologies to enhance my skills.",
-                    style: GoogleFonts.poppins(
-                      color: Colors.white.withOpacity(0.9),
-                      fontSize: 18,
-                      height: 1.6,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                const SizedBox(height: 40),
-                // Social links centered
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () => _launchURL('https://github.com/Amogh050'),
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/icons/github.svg',
-                            width: 24,
-                            height: 24,
-                            colorFilter: const ColorFilter.mode(
-                              Colors.white,
-                              BlendMode.srcIn,
-                            ),
-                          ),
+                      child: SvgPicture.asset(
+                        'assets/icons/github.svg',
+                        width: 30,
+                        height: 30,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16),
-                    MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () => _launchURL('https://www.linkedin.com/in/amogh-deshpande-56a764289/'),
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/icons/linkedin.svg',
-                            width: 24,
-                            height: 24,
-                            colorFilter: const ColorFilter.mode(
-                              Colors.white,
-                              BlendMode.srcIn,
-                            ),
-                          ),
+                  ),
+                ),
+                const SizedBox(width: 25),
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: () => _launchURL('https://www.linkedin.com/in/amogh-deshpande-56a764289/'),
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/icons/linkedin.svg',
+                        width: 30,
+                        height: 30,
+                        colorFilter: const ColorFilter.mode(
+                          Colors.white,
+                          BlendMode.srcIn,
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-                const SizedBox(height: 24),
-                // Download Resume Button
-                ResumeDownloadButton(),
               ],
             ),
-          ),
-        ],
+            const SizedBox(height: 30),
+            
+            Center(
+              child: ResumeDownloadButton(),
+            ),
+          ],
+        ),
       ),
     );
   }

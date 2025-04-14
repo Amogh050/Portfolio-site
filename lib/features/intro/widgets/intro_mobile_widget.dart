@@ -37,32 +37,34 @@ class IntroMobileWidget extends StatelessWidget {
           const SizedBox(height: 30),
           
           // Paragraph in purple bordered box
-          Container(
-            width: MediaQuery.of(context).size.width * 0.85,
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.3),
-              border: Border.all(
-                color: Colors.purple.withOpacity(0.5),
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.purple.withOpacity(0.1),
-                  blurRadius: 15,
-                  spreadRadius: 2,
+          Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.85,
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.3),
+                border: Border.all(
+                  color: Colors.purple.withOpacity(0.5),
+                  width: 2,
                 ),
-              ],
-            ),
-            child: Text(
-              "I'm a B.Tech Computer Science student at ABV IIITM Gwalior with a strong passion for software development. I specialize in Flutter for mobile app development and have experience in backend technologies like Node.js, Express, and MongoDB. My expertise extends to real-time systems, algorithmic problem-solving, and database management. I enjoy building efficient, scalable solutions and continuously exploring new technologies to enhance my skills.",
-              style: GoogleFonts.poppins(
-                color: Colors.white.withOpacity(0.9),
-                fontSize: 16,
-                height: 1.6,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.purple.withOpacity(0.1),
+                    blurRadius: 15,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
-              textAlign: TextAlign.center,
+              child: Text(
+                "I'm a B.Tech Computer Science student at ABV IIITM Gwalior with a strong passion for software development. I specialize in Flutter for mobile app development and have experience in backend technologies like Node.js, Express, and MongoDB. My expertise extends to real-time systems, algorithmic problem-solving, and database management. I enjoy building efficient, scalable solutions and continuously exploring new technologies to enhance my skills.",
+                style: GoogleFonts.poppins(
+                  color: Colors.white.withOpacity(0.9),
+                  fontSize: 16,
+                  height: 1.6,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
           
@@ -122,7 +124,9 @@ class IntroMobileWidget extends StatelessWidget {
           const SizedBox(height: 24),
           
           // Download Resume Button
-          ResumeDownloadButton(),
+          Center(
+            child: ResumeDownloadButton(),
+          ),
         ],
       ),
     );
