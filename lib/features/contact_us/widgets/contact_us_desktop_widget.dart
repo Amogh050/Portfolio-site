@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../design/circuit_background.dart';
 
 class ContactUsDesktopWidget extends StatelessWidget {
@@ -18,9 +17,22 @@ class ContactUsDesktopWidget extends StatelessWidget {
   }
 
   Future<void> _launchEmail(String email) async {
-    final Uri emailUri = Uri.parse('mailto:$email');
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri);
+    // Create Gmail URL (opens in Gmail app or Gmail web)
+    final String gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=$email';
+    
+    try {
+      // Try Gmail first
+      if (await canLaunchUrl(Uri.parse(gmailUrl))) {
+        await launchUrl(Uri.parse(gmailUrl), mode: LaunchMode.externalApplication);
+      } else {
+        // Fallback to regular mailto
+        final Uri emailUri = Uri.parse('mailto:$email');
+        if (await canLaunchUrl(emailUri)) {
+          await launchUrl(emailUri);
+        }
+      }
+    } catch (e) {
+      print('Could not launch email: $e');
     }
   }
 
@@ -79,7 +91,7 @@ class ContactUsDesktopWidget extends StatelessWidget {
               child: Text(
                 'Contact Me',
                 style: GoogleFonts.tourney(
-                  fontSize: 45,
+                  fontSize: 60,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   letterSpacing: 1.0,

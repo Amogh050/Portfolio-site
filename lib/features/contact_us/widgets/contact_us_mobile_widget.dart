@@ -16,9 +16,22 @@ class ContactUsMobileWidget extends StatelessWidget {
   }
 
   Future<void> _launchEmail(String email) async {
-    final Uri emailUri = Uri.parse('mailto:$email');
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri);
+    // Create Gmail URL (opens in Gmail app or Gmail web)
+    final String gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=$email';
+    
+    try {
+      // Try Gmail first
+      if (await canLaunchUrl(Uri.parse(gmailUrl))) {
+        await launchUrl(Uri.parse(gmailUrl), mode: LaunchMode.externalApplication);
+      } else {
+        // Fallback to regular mailto
+        final Uri emailUri = Uri.parse('mailto:$email');
+        if (await canLaunchUrl(emailUri)) {
+          await launchUrl(emailUri);
+        }
+      }
+    } catch (e) {
+      print('Could not launch email: $e');
     }
   }
 

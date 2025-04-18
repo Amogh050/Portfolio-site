@@ -47,7 +47,7 @@ class SkillsDesktopWidget extends StatelessWidget {
             child: Text(
               'Skills',
               style: GoogleFonts.tourney(
-                fontSize: 45,
+                fontSize: 60,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 letterSpacing: 1.0,

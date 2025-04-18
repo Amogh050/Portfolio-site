@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TypingAnimationWidget extends StatefulWidget {
   final double fontSize;
   final Color textColor;
   final bool isMobile;
+  final bool useGradient;
 
   const TypingAnimationWidget({
     super.key,
     required this.fontSize,
     required this.textColor,
     this.isMobile = false,
+    this.useGradient = false,
   });
 
   @override
@@ -81,15 +82,42 @@ class _TypingAnimationWidgetState extends State<TypingAnimationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    final textWidget = Text(
       _currentText,
       style: TextStyle(
         fontFamily: 'Ethnocentric',
         color: widget.textColor,
         fontSize: widget.fontSize,
         fontWeight: FontWeight.w600,
+        shadows: [
+          Shadow(
+            color: Colors.purple.withOpacity(0.4),
+            offset: const Offset(0, 2),
+            blurRadius: 8,
+          ),
+        ],
       ),
       textAlign: widget.isMobile ? TextAlign.center : TextAlign.left,
     );
+
+    if (widget.useGradient) {
+      return ShaderMask(
+        shaderCallback: (bounds) {
+          return const LinearGradient(
+            colors: [
+              Colors.white,
+              Color(0xFFB275F4), // Light purple
+              Color(0xFF7B1FA2), // Deep purple
+            ],
+            stops: [0.0, 0.4, 1.0],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ).createShader(bounds);
+        },
+        child: textWidget,
+      );
+    } else {
+      return textWidget;
+    }
   }
 } 

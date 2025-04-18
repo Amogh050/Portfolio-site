@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../common/responsive_utils.dart';
 import '../intro/widgets/intro_desktop_widget.dart';
 import '../intro/widgets/intro_mobile_widget.dart';
@@ -12,7 +11,6 @@ import '../contact_us/widgets/contact_us_mobile_widget.dart';
 import '../welcome/widgets/welcome_screen.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import '../../design/circuit_background.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

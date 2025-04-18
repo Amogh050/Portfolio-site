@@ -13,7 +13,7 @@ class ProjectsDesktopWidget extends StatelessWidget {
           child: Text(
             'Featured Projects',
             style: GoogleFonts.tourney(
-              fontSize: 45,
+              fontSize: 60,
               fontWeight: FontWeight.bold,
               color: Colors.white,
               letterSpacing: 1.0,

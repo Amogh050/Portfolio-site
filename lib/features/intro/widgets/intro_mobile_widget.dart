@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../design/circuit_background.dart';
-import 'typing_animation_widget.dart';
 import 'intro_desktop_widget.dart';
 
 class IntroMobileWidget extends StatelessWidget {

@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../design/circuit_background.dart';
-import 'typing_animation_widget.dart';
 
 class IntroDesktopWidget extends StatelessWidget {
   const IntroDesktopWidget({super.key});
@@ -28,7 +27,7 @@ class IntroDesktopWidget extends StatelessWidget {
             Text(
               'About Me',
               style: GoogleFonts.tourney(
-                fontSize: 50,
+                fontSize: 60,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 letterSpacing: 1.5,
@@ -173,37 +172,51 @@ class _ResumeDownloadButtonState extends State<ResumeDownloadButton> {
           boxShadow: _isHovered
               ? [
                   BoxShadow(
-                    color: const Color(0xFF00FFFF).withOpacity(0.6),
+                    color: Colors.purple.withOpacity(0.5),
                     blurRadius: 12,
                     spreadRadius: 2,
                   )
                 ]
               : [],
         ),
-        child: ElevatedButton(
-          onPressed: () => _launchURL('https://drive.google.com/file/d/1RQ1vE8m-dnODS2smp0tjFfwkQrYqe7X8/view?usp=sharing'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: _isHovered ? const Color(0xFF00FFFF) : const Color(0xFF00BFFF),
-            foregroundColor: Colors.black,
-            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: _isHovered
+                  ? [
+                      const Color(0xFF9C27B0), // Medium purple
+                      const Color(0xFFD500F9), // Bright purple
+                    ]
+                  : [
+                      const Color(0xFF6A1B9A), // Deep purple
+                      const Color(0xFF9C27B0), // Medium purple
+                    ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-            elevation: _isHovered ? 8 : 4,
+            borderRadius: BorderRadius.circular(15),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Download Resume',
-                style: TextStyle(
-                  color: _isHovered ? Colors.black : Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5,
-                ),
+          child: ElevatedButton(
+            onPressed: () => _launchURL('https://drive.google.com/file/d/1RQ1vE8m-dnODS2smp0tjFfwkQrYqe7X8/view?usp=sharing'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
               ),
-            ],
+              elevation: 0,
+              shadowColor: Colors.transparent,
+            ),
+            child: Text(
+              'Download Resume',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.8,
+              ),
+            ),
           ),
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../intro/widgets/typing_animation_widget.dart';
 import 'dart:math';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
@@ -217,10 +216,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SizedBox(height: isDesktop ? 30 : 20),
 
                   // Typing animation
-                  TypingAnimationWidget(
-                    fontSize: isDesktop ? 40 : 22,
-                    textColor: Colors.cyan,
-                    isMobile: !isDesktop,
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.purple.withOpacity(0.1),
+                          blurRadius: 15,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: TypingAnimationWidget(
+                      fontSize: isDesktop ? 40 : 22,
+                      textColor: Colors.white,
+                      isMobile: !isDesktop,
+                      useGradient: true,
+                    ),
                   ),
                 ],
               ),

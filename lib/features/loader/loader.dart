@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class Loader extends StatefulWidget {
   const Loader({super.key});
@@ -80,53 +79,32 @@ class _LoaderState extends State<Loader> with SingleTickerProviderStateMixin {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Portfolio logo with slight bounce effect
-                  TweenAnimationBuilder(
-                    tween: Tween<double>(begin: 0.9, end: 1.0),
-                    duration: const Duration(milliseconds: 1500),
-                    curve: Curves.elasticOut,
-                    builder: (context, value, child) {
-                      return Transform.scale(
-                        scale: value,
-                        child: child,
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.purple.withOpacity(0.2),
-                            blurRadius: 20,
-                            spreadRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: Image.asset(
-                        'assets/icons/profile_icon.png',
-                        height: 150,
-                        fit: BoxFit.contain,
-                      ),
+                  // Loading animation with increased size
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.purple.withOpacity(0.2),
+                          blurRadius: 30,
+                          spreadRadius: 10,
+                        ),
+                      ],
+                    ),
+                    child: LoadingAnimationWidget.dotsTriangle(
+                      color: Colors.purple,
+                      size: 120,
                     ),
                   ),
                   
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 30),
                   
-                  // Loading animation
-                  LoadingAnimationWidget.dotsTriangle(
-                    color: Colors.purple,
-                    size: 80,
-                  ),
-                  
-                  const SizedBox(height: 20),
-                  
-                  // Loading text
+                  // Loading text with increased size
                   const Text(
                     'Loading Portfolio...',
                     style: TextStyle(
                       color: Colors.white70,
-                      fontSize: 16,
+                      fontSize: 20,
                       fontFamily: 'Preah',
                       letterSpacing: 1.2,
                     ),
