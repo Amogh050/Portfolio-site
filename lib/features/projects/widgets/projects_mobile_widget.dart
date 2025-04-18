@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math';
 import 'project_card.dart';
 
 class ProjectsMobileWidget extends StatelessWidget {
@@ -8,7 +9,7 @@ class ProjectsMobileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final cardWidth = screenWidth * 0.7;
+    final cardWidth = min(screenWidth * 0.7, 400.0);
     final cardHeight = 400.0; // Increased height to avoid overflow
     
     return Column(
@@ -33,7 +34,7 @@ class ProjectsMobileWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                const SizedBox(width: 12), // Reduced from 16
+                const SizedBox(width: 12),
                 SizedBox(
                   width: cardWidth,
                   height: cardHeight,
@@ -48,7 +49,7 @@ class ProjectsMobileWidget extends StatelessWidget {
                     technologies: ['Flutter', 'NodeJS', 'MongoDB', 'JWT', 'Render'],
                   ),
                 ),
-                const SizedBox(width: 20), // Reduced from 24
+                const SizedBox(width: 20),
                 SizedBox(
                   width: cardWidth,
                   height: cardHeight,
@@ -63,7 +64,7 @@ class ProjectsMobileWidget extends StatelessWidget {
                     technologies: ['Flutter', 'NodeJS', 'MongoDB', 'WebSockets'],
                   ),
                 ),
-                const SizedBox(width: 12), // Reduced from 16
+                const SizedBox(width: 12),
               ],
             ),
           ),
@@ -78,7 +79,7 @@ class ProjectsMobileWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                const SizedBox(width: 12), // Reduced from 16
+                const SizedBox(width: 12),
                 SizedBox(
                   width: cardWidth,
                   height: cardHeight,
@@ -93,7 +94,7 @@ class ProjectsMobileWidget extends StatelessWidget {
                     technologies: ['Flutter', 'Riverpod', 'API'],
                   ),
                 ),
-                const SizedBox(width: 20), // Reduced from 24
+                const SizedBox(width: 20),
                 SizedBox(
                   width: cardWidth,
                   height: cardHeight,
@@ -108,13 +109,13 @@ class ProjectsMobileWidget extends StatelessWidget {
                     technologies: ['Flutter', 'API', 'Text-to-Speech'],
                   ),
                 ),
-                const SizedBox(width: 12), // Reduced from 16
+                const SizedBox(width: 12),
               ],
             ),
           ),
         ),
         
-        const SizedBox(height: 20), // Reduced from 24
+        const SizedBox(height: 20),
       ],
     );
   }

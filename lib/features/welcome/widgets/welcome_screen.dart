@@ -111,7 +111,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
             // Text content
             Positioned(
-              top: isDesktop ? size.height * 0.4 : size.height * 0.18,
+              top: isDesktop ? size.height * 0.4 : size.height * 0.1,
               left: max(size.width * 0.03, 15),
               width: isDesktop ? size.width * 0.47 : size.width * 0.88,
               child: Column(
