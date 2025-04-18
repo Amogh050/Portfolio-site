@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Internet permission needed for 3D model viewer -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    
     <application
         android:label="amogh_deshpande"
+        android:usesCleartextTraffic="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

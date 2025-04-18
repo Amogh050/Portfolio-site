@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../design/circuit_background.dart';
 import 'typing_animation_widget.dart';
 
 class IntroDesktopWidget extends StatelessWidget {
@@ -35,39 +36,41 @@ class IntroDesktopWidget extends StatelessWidget {
             ),
             SizedBox(height: 50),
             
-            Container(
-              width: screenSize.width * 0.8,
-              padding: const EdgeInsets.all(35),
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.3),
-                border: Border.all(
-                  color: Colors.purple.withOpacity(0.5),
-                  width: 3,
-                ),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.purple.withOpacity(0.15),
-                    blurRadius: 25,
-                    spreadRadius: 3,
-                    offset: const Offset(0, 5),
+            InteractiveElement(
+              child: Container(
+                width: screenSize.width * 0.8,
+                padding: const EdgeInsets.all(35),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.3),
+                  border: Border.all(
+                    color: Colors.purple.withOpacity(0.5),
+                    width: 3,
                   ),
-                  BoxShadow(
-                    color: Colors.blue.withOpacity(0.05),
-                    blurRadius: 40,
-                    spreadRadius: 2,
-                    offset: const Offset(0, -2),
-                  ),
-                ],
-              ),
-              child: Text(
-                "I'm a B.Tech Computer Science student at ABV IIITM Gwalior with a strong passion for software development. I specialize in Flutter for mobile app development and have experience in backend technologies like Node.js, Express, and MongoDB. My expertise extends to real-time systems, algorithmic problem-solving, and database management. I enjoy building efficient, scalable solutions and continuously exploring new technologies to enhance my skills.",
-                style: GoogleFonts.poppins(
-                  color: Colors.white.withOpacity(0.95),
-                  fontSize: 20,
-                  height: 1.7,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.purple.withOpacity(0.15),
+                      blurRadius: 25,
+                      spreadRadius: 3,
+                      offset: const Offset(0, 5),
+                    ),
+                    BoxShadow(
+                      color: Colors.blue.withOpacity(0.05),
+                      blurRadius: 40,
+                      spreadRadius: 2,
+                      offset: const Offset(0, -2),
+                    ),
+                  ],
                 ),
-                textAlign: TextAlign.center,
+                child: Text(
+                  "I'm a B.Tech Computer Science student at ABV IIITM Gwalior with a strong passion for software development. I specialize in Flutter for mobile app development and have experience in backend technologies like Node.js, Express, and MongoDB. My expertise extends to real-time systems, algorithmic problem-solving, and database management. I enjoy building efficient, scalable solutions and continuously exploring new technologies to enhance my skills.",
+                  style: GoogleFonts.poppins(
+                    color: Colors.white.withOpacity(0.95),
+                    fontSize: 20,
+                    height: 1.7,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
             const SizedBox(height: 50),
@@ -75,46 +78,50 @@ class IntroDesktopWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    onTap: () => _launchURL('https://github.com/Amogh050'),
-                    child: Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: SvgPicture.asset(
-                        'assets/icons/github.svg',
-                        width: 30,
-                        height: 30,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.white,
-                          BlendMode.srcIn,
+                InteractiveElement(
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () => _launchURL('https://github.com/Amogh050'),
+                      child: Container(
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/icons/github.svg',
+                          width: 30,
+                          height: 30,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(width: 25),
-                MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    onTap: () => _launchURL('https://www.linkedin.com/in/amogh-deshpande-56a764289/'),
-                    child: Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: SvgPicture.asset(
-                        'assets/icons/linkedin.svg',
-                        width: 30,
-                        height: 30,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.white,
-                          BlendMode.srcIn,
+                InteractiveElement(
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: () => _launchURL('https://www.linkedin.com/in/amogh-deshpande-56a764289/'),
+                      child: Container(
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: SvgPicture.asset(
+                          'assets/icons/linkedin.svg',
+                          width: 30,
+                          height: 30,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       ),
                     ),
@@ -125,7 +132,9 @@ class IntroDesktopWidget extends StatelessWidget {
             const SizedBox(height: 30),
             
             Center(
-              child: ResumeDownloadButton(),
+              child: InteractiveElement(
+                child: ResumeDownloadButton(),
+              ),
             ),
           ],
         ),

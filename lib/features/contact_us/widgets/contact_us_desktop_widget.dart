@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../design/circuit_background.dart';
 
 class ContactUsDesktopWidget extends StatelessWidget {
   const ContactUsDesktopWidget({super.key});
@@ -125,23 +127,25 @@ class ContactUsDesktopWidget extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 20),
-                            MouseRegion(
-                              cursor: SystemMouseCursors.click,
-                              child: GestureDetector(
-                                onTap: () => _launchURL('https://github.com/Amogh050'),
-                                child: Container(
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: SvgPicture.asset(
-                                    'assets/icons/github.svg',
-                                    width: 24,
-                                    height: 24,
-                                    colorFilter: const ColorFilter.mode(
-                                      Colors.white,
-                                      BlendMode.srcIn,
+                            InteractiveElement(
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: GestureDetector(
+                                  onTap: () => _launchURL('https://github.com/Amogh050'),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(12),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: SvgPicture.asset(
+                                      'assets/icons/github.svg',
+                                      width: 24,
+                                      height: 24,
+                                      colorFilter: const ColorFilter.mode(
+                                        Colors.white,
+                                        BlendMode.srcIn,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -174,64 +178,70 @@ class ContactUsDesktopWidget extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 30),
-                          TextField(
-                            controller: nameController,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                              hintText: 'Your Name',
-                              hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(color: Colors.purple),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 30),
-                          TextField(
-                            controller: messageController,
-                            maxLines: 5,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: InputDecoration(
-                              hintText: 'Your Message',
-                              hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(color: Colors.purple),
+                          InteractiveElement(
+                            child: TextField(
+                              controller: nameController,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                hintText: 'Your Name',
+                                hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(color: Colors.purple),
+                                ),
                               ),
                             ),
                           ),
                           const SizedBox(height: 30),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (nameController.text.isNotEmpty && 
-                                  messageController.text.isNotEmpty) {
-                                _sendEmailWithContent(
-                                  nameController.text.trim(),
-                                  messageController.text.trim()
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.purple,
-                              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                          InteractiveElement(
+                            child: TextField(
+                              controller: messageController,
+                              maxLines: 5,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                hintText: 'Your Message',
+                                hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(color: Colors.purple),
+                                ),
                               ),
                             ),
-                            child: const Text(
-                              'Send Message',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'Preah',
-                                fontSize: 16,
+                          ),
+                          const SizedBox(height: 30),
+                          InteractiveElement(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (nameController.text.isNotEmpty && 
+                                    messageController.text.isNotEmpty) {
+                                  _sendEmailWithContent(
+                                    nameController.text.trim(),
+                                    messageController.text.trim()
+                                  );
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.purple,
+                                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: const Text(
+                                'Send Message',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Preah',
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
                           ),
@@ -252,39 +262,43 @@ class ContactUsDesktopWidget extends StatelessWidget {
     Widget valueWidget;
     
     if (title == 'Email') {
-      valueWidget = MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: () => _launchEmail(value),
-          child: Text(
-            value,
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: 'Preah',
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline,
-              decorationColor: Colors.white70,
-              decorationThickness: 1,
+      valueWidget = InteractiveElement(
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => _launchEmail(value),
+            child: Text(
+              value,
+              style: const TextStyle(
+                color: Colors.white,
+                fontFamily: 'Preah',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.white70,
+                decorationThickness: 1,
+              ),
             ),
           ),
         ),
       );
     } else if (title == 'Phone') {
-      valueWidget = MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onTap: () => _launchPhone(value),
-          child: Text(
-            value,
-            style: const TextStyle(
-              color: Colors.white,
-              fontFamily: 'Preah',
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline,
-              decorationColor: Colors.white70,
-              decorationThickness: 1,
+      valueWidget = InteractiveElement(
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => _launchPhone(value),
+            child: Text(
+              value,
+              style: const TextStyle(
+                color: Colors.white,
+                fontFamily: 'Preah',
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.white70,
+                decorationThickness: 1,
+              ),
             ),
           ),
         ),
